@@ -1,7 +1,7 @@
 import React from "react";
-import axiosWithCred from '../axiosWithCred';
+import axiosWithCred from "../axiosWithCred";
 
-class Login extends React.Component {
+class Register extends React.Component {
     state = {
       credentials: {
         username: '',
@@ -19,14 +19,14 @@ class Login extends React.Component {
       });
     };
   
-    login = e => {
+    register = e => {
       e.preventDefault();
       axiosWithCred
-        .post('http://localhost:4000/api/users/login', this.state.credentials)
+        .post('http://localhost:4000/api/users/register', this.state.credentials)
         .then(res => {
           console.log(res)
         //   localStorage.setItem('token', res.data.payload);
-          this.props.history.push('/users');
+          this.props.history.push('/login');
         })
         .catch(err => console.log(err.response));
     };
@@ -34,7 +34,7 @@ class Login extends React.Component {
     render() {
       return (
         <div className="login">
-          <form  className="loginForm" onSubmit={this.login}>
+          <form className="loginForm" onSubmit={this.register}>
             <input
               type="text"
               placeholder="username"
@@ -49,7 +49,7 @@ class Login extends React.Component {
               value={this.state.credentials.password}
               onChange={this.handleChange}
             />
-            <button className="loginBtn">Log in</button>
+            <button className="loginBtn">Register</button>
           </form>
         </div>
       );
@@ -58,4 +58,4 @@ class Login extends React.Component {
   
   
   
-  export default Login;
+  export default Register;
